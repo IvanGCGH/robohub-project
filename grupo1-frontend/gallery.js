@@ -26,4 +26,12 @@
 // `).join('');
 // ============================================
 
-// Tu código acá...
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(() => {
+      renderFeaturedGallery();
+  }, 100);
+});
+
+function renderFeaturedGallery() {
+  // Tu código acá...
+};

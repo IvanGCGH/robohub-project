@@ -42,7 +42,9 @@ body {
   padding: 20px;
 }
 
-/* Tipografía */
+/* ============================================
+   TIPOGRAFÍA
+   ============================================ */
 
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
@@ -58,7 +60,9 @@ p {
   margin-bottom: 1rem;
 }
 
-/* Botones */
+/* ============================================
+   BOTONES
+   ============================================ */
 
 button {
   cursor: pointer;
@@ -107,7 +111,9 @@ button {
   background-color: #c82333;
 }
 
-/* Cards de robots */
+/* ============================================
+   CARDS DE ROBOTS
+   ============================================ */
 
 #robots-list {
   display: grid;
@@ -252,7 +258,9 @@ button {
   background-color: #c82333;
 }
 
-/* Modal */
+/* ============================================
+   MODAL
+   ============================================ */
 
 .modal {
   display: none;
@@ -324,7 +332,9 @@ button {
   transform: rotate(90deg);
 }
 
-/* Formularios */
+/* ============================================
+   FORMULARIOS
+   ============================================ */
 
 form {
   padding: 20px;
@@ -372,7 +382,9 @@ form {
   padding-top: 10px;
 }
 
-/* Estado vacío */
+/* ============================================
+   ESTADO VACÍO
+   ============================================ */
 
 .empty-state {
   text-align: center;
@@ -388,7 +400,9 @@ form {
   margin-bottom: 20px;
 }
 
-/* Utilidades */
+/* ============================================
+   UTILIDADES
+   ============================================ */
 
 .text-center {
   text-align: center;
@@ -402,7 +416,9 @@ form {
 .mb-2 { margin-bottom: 20px; }
 .mb-3 { margin-bottom: 30px; }
 
-/* Responsive */
+/* ============================================
+   RESPONSIVE
+   ============================================ */
 
 @media (max-width: 768px) {
   .container {
@@ -419,5 +435,33 @@ form {
 
   .modal-content {
     width: 95%;
+  }
+}
+
+/* ============================================
+   CONTROLES Y SECCIONES ADICIONALES
+   ============================================ */
+
+.controls-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.advanced-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .controls-section,
+  .advanced-controls {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
