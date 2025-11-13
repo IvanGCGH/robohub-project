@@ -31,3 +31,14 @@
 // ============================================
 
 // Tu código acá...
+
+
+
+const sortSelect = document.getElementById("sort-select");
+
+sortSelect.addEventListener('change', (e) => {
+    
+    AppState.sortBy = e.target.value;
+    AppState.robots = sortRobots(robots, e);
+    renderRobots();
+});
