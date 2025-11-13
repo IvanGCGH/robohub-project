@@ -33,12 +33,32 @@
 // Tu código acá...
 
 
-
-const sortSelect = document.getElementById("sort-select");
-
-sortSelect.addEventListener('change', (e) => {
-    
-    AppState.sortBy = e.target.value;
-    AppState.robots = sortRobots(robots, e);
-    renderRobots();
+document.addEventListener('DOMContentLoaded', () => {
+    const boxHtml = document.getElementById('sorting-controls');
+    boxHtml.innerHTML = `
+        <div class="sorting-wrapper">
+            <i class="sort-icon">⬆️</i>
+            <i class="sort-icon">⬇️</i>
+            <p class="sort-label">Ordenar por</p>
+            <select id="sort-select" class="sort-select">
+                <option value="name" class="sort-select">Nombre(A-Z)</option>
+                <option value="year" class="sort-select">Año(Más reciente)</option>
+                <option value="type" class="sort-select">Tipo(A-Z)</option>
+                <option value="newest" class="sort-select">Agregados recientemente</option>
+            </select>
+        </div>
+    `;
+  
+    const sortSelect = document.getElementById('sort-select');
+  
+    sortSelect.addEventListener('change', (e) => {
+      const criteria = e.target.value;
+      AppState.sortBy = criteria;
+      AppState.robots = sortRobots(AppState.robots, criteria);
+      renderRobots();
+    });
 });
+
+
+
+

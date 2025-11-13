@@ -42,24 +42,62 @@
 
 // Tu código acá...
 
-const exportBtn = document.getElementById("export-btn");
 
 
-exportBtn.addEventListener('click', () => {
-  const data = {
-    exportDate: new Date().toISOString(),
-    totalRobots: AppState.robots.length,
-    robots: AppState.robots
-  };
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const containerBtn = document.getElementById('export-container');
+  containerBtn.innerHTML = `
+  <button id="export-btn" class="btn-export">
+    <i class="export-icon">📥</i>
+   Exportar JSON
+  </button>
+  `;
   
-  const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
   
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `robohub-export-${Date.now()}.json`;
-  a.click();
-  
-  URL.revokeObjectURL(url);
+  const exportBtn = document.getElementById("export-btn");
+
+  exportBtn.addEventListener('click', () => {
+    const data = {
+      exportDate: new Date().toISOString(),
+      totalRobots: AppState.robots.length,
+      robots: AppState.robots
+    };
+    
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `robohub-export-${Date.now()}.json`;
+    a.click();
+    
+    URL.revokeObjectURL(url);
+
+    const notification = document.createElement('div');
+    notification.className = "export-notification";
+
+
+    notification.innerHTML = 
+    `
+      <div class="notification-content">
+      <i class="notification-icon">✅</i>
+      <div class="notification-text">
+        <strong>Exportación Exitosa</strong>
+        <p>Tu archivo JSON se ha descargado correctamente.</p>
+      </div>
+    </div>
+    `;
+    
+    document.body.appendChild(notification);
+
+    // La animación de salida (opcional)
+    setTimeout(() => {
+      notification.style.animation = "slideOutDown 0.5s ease forwards";
+      setTimeout(() => notification.remove(), 500);
+    }, 3000);
+
+  });
 });

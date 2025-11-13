@@ -43,6 +43,14 @@
 }
 
 .export-notification {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 15px 25px;
+  background-color: rgb(1, 179, 1);
+  border-radius: 12px;
+  box-shadow: "0 4px 15px rgba(0,0,0,0.1)";
+  z-index: "9999";
   animation: slideInUp 0.5s ease;
 }
 
@@ -57,12 +65,14 @@
 }
 
 .notification-text strong {
+  color: white;
   display: block;
   font-size: 1.1rem;
   margin-bottom: 5px;
 }
 
 .notification-text p {
+  color: white;
   margin: 0;
   opacity: 0.9;
   font-size: 0.9rem;
