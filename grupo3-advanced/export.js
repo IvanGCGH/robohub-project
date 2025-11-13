@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.body.appendChild(notification);
 
-    // La animación de salida (opcional)
+    // La animación de salida
     setTimeout(() => {
       notification.style.animation = "slideOutDown 0.5s ease forwards";
       setTimeout(() => notification.remove(), 500);

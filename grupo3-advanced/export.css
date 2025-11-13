@@ -26,6 +26,7 @@
 .export-icon {
   font-size: 1.3rem;
   animation: bounce 2s ease-in-out infinite;
+  font-style: normal;
 }
 
 @keyframes bounce {
@@ -62,6 +63,7 @@
 
 .notification-icon {
   font-size: 2rem;
+  font-style: normal;
 }
 
 .notification-text strong {
