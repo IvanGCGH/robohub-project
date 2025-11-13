@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoboHub - Portal de Robots</title>
+  
+  <!-- CSS Global -->
+  <link rel="stylesheet" href="styles/global.css">
+  
+  <!-- CSS de cada grupo -->
+  <link rel="stylesheet" href="grupo1-frontend/header.css">
+  <link rel="stylesheet" href="grupo1-frontend/footer.css">
+  <link rel="stylesheet" href="grupo1-frontend/hero.css">
+  <link rel="stylesheet" href="grupo1-frontend/about.css">
+  <link rel="stylesheet" href="grupo1-frontend/gallery.css">
+  
+  <link rel="stylesheet" href="grupo2-core/form.css">
+  <link rel="stylesheet" href="grupo2-core/search.css">
+  <link rel="stylesheet" href="grupo2-core/filters.css">
+  <link rel="stylesheet" href="grupo2-core/crud.css">
+  <link rel="stylesheet" href="grupo2-core/list.css">
+  
+  <link rel="stylesheet" href="grupo3-advanced/stats.css">
+  <link rel="stylesheet" href="grupo3-advanced/favorites.css">
+  <link rel="stylesheet" href="grupo3-advanced/sorting.css">
+  <link rel="stylesheet" href="grupo3-advanced/modal.css">
+  <link rel="stylesheet" href="grupo3-advanced/export.css">
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- GRUPO 1: FRONTEND/PRESENTACIÓN -->
+  <!-- ============================================ -->
+  
+  <!-- Header (Grupo 1) -->
+  <header id="main-header">
+    <!-- El Grupo 1 completará este header -->
+  </header>
+
+  <!-- Hero Section (Grupo 1) -->
+  <section id="hero-section">
+    <!-- El Grupo 1 completará esta sección hero -->
+  </section>
+
+  <!-- About Section (Grupo 1) -->
+  <section id="about-section">
+    <!-- El Grupo 1 completará la sección "Acerca de" -->
+  </section>
+
+  <!-- ============================================ -->
+  <!-- GRUPO 2: CORE FUNCTIONALITY -->
+  <!-- ============================================ -->
+  
+  <main class="container">
+    
+    <!-- Controles principales (Grupo 2) -->
+    <div class="controls-section">
+      
+      <!-- Botón agregar robot (Grupo 2) -->
+      <div id="add-robot-container">
+        <!-- El Grupo 2 agregará el botón para abrir el modal -->
+      </div>
+
+      <!-- Barra de búsqueda (Grupo 2) -->
+      <div id="search-container">
+        <!-- El Grupo 2 agregará la barra de búsqueda -->
+      </div>
+
+      <!-- Filtros (Grupo 2) -->
+      <div id="filters-container">
+        <!-- El Grupo 2 agregará los filtros -->
+      </div>
+
+    </div>
+
+    <!-- ============================================ -->
+    <!-- GRUPO 3: ADVANCED FEATURES -->
+    <!-- ============================================ -->
+    
+    <!-- Panel de estadísticas (Grupo 3) -->
+    <div id="stats-panel">
+      <!-- El Grupo 3 agregará las estadísticas -->
+    </div>
+
+    <!-- Controles avanzados (Grupo 3) -->
+    <div class="advanced-controls">
+      
+      <!-- Botón de favoritos (Grupo 3) -->
+      <div id="favorites-toggle">
+        <!-- El Grupo 3 agregará el toggle de favoritos -->
+      </div>
+
+      <!-- Ordenamiento (Grupo 3) -->
+      <div id="sorting-controls">
+        <!-- El Grupo 3 agregará los controles de ordenamiento -->
+      </div>
+
+      <!-- Exportar (Grupo 3) -->
+      <div id="export-container">
+        <!-- El Grupo 3 agregará el botón de exportar -->
+      </div>
+
+    </div>
+
+    <!-- ============================================ -->
+    <!-- LISTA DE ROBOTS (Todos los grupos interactúan) -->
+    <!-- ============================================ -->
+    
+    <!-- Lista de robots (Grupo 2 crea, otros grupos la usan) -->
+    <div id="robots-list">
+      <!-- Acá se renderizan las cards de robots -->
+    </div>
+
+    <!-- Galería destacada (Grupo 1) -->
+    <div id="featured-gallery">
+      <!-- El Grupo 1 agregará una galería de robots destacados -->
+    </div>
+
+  </main>
+
+  <!-- ============================================ -->
+  <!-- FOOTER (Grupo 1) -->
+  <!-- ============================================ -->
+  
+  <footer id="main-footer">
+    <!-- El Grupo 1 completará el footer -->
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- MODAL DE FORMULARIO (Incluido en el proyecto base) -->
+  <!-- ============================================ -->
+  
+  <!-- Modal para agregar/editar robots -->
+  <div id="robot-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Agregar Robot</h2>
+        <span class="modal-close">&times;</span>
+      </div>
+      
+      <form id="robot-form">
+        <div class="form-group">
+          <label for="robot-name">Nombre del Robot *</label>
+          <input type="text" id="robot-name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="robot-type">Tipo *</label>
+          <select id="robot-type" name="type" required>
+            <option value="">Selecciona un tipo</option>
+            <option value="Humanoide">Humanoide</option>
+            <option value="Industrial">Industrial</option>
+            <option value="Doméstico">Doméstico</option>
+            <option value="Médico">Médico</option>
+            <option value="Militar">Militar</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="robot-year">Año de creación *</label>
+          <input type="number" id="robot-year" name="year" min="1900" max="2100" required>
+        </div>
+
+        <div class="form-group">
+          <label for="robot-description">Descripción</label>
+          <textarea id="robot-description" name="description" rows="4"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="modal-cancel">Cancelar</button>
+          <button type="submit" class="btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de detalles (Grupo 3) -->
+  <div id="details-modal" class="modal">
+    <!-- El Grupo 3 agregará el contenido del modal de detalles -->
+  </div>
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT -->
+  <!-- ============================================ -->
+  
+  <!-- App.js - Funciones compartidas (incluido en proyecto base) -->
+  <script src="app.js"></script>
+  
+  <!-- Scripts de cada grupo -->
+  <script src="grupo1-frontend/header.js"></script>
+  <script src="grupo1-frontend/footer.js"></script>
+  <script src="grupo1-frontend/hero.js"></script>
+  <script src="grupo1-frontend/about.js"></script>
+  <script src="grupo1-frontend/gallery.js"></script>
+  
+  <script src="grupo2-core/form.js"></script>
+  <script src="grupo2-core/search.js"></script>
+  <script src="grupo2-core/filters.js"></script>
+  <script src="grupo2-core/crud.js"></script>
+  <script src="grupo2-core/list.js"></script>
+  
+  <script src="grupo3-advanced/stats.js"></script>
+  <script src="grupo3-advanced/favorites.js"></script>
+  <script src="grupo3-advanced/sorting.js"></script>
+  <script src="grupo3-advanced/detailsModal.js"></script>
+  <script src="grupo3-advanced/export.js"></script>
+  
+  <!-- Inicialización de la app -->
+  <script src="init.js"></script>
+
+</body>
+</html>

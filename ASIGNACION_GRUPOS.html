@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asignación de grupos - RoboHub</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 40px;
+      line-height: 1.6;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #001E60;
+    }
+
+    .header h1 {
+      color: #001E60;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 1.2rem;
+    }
+
+    .grupo {
+      margin-bottom: 40px;
+      padding: 30px;
+      border: 2px solid #001E60;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      page-break-inside: avoid;
+    }
+
+    .grupo-header {
+      background-color: #001E60;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .grupo-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    .grupo-header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .integrantes {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .integrantes h3 {
+      color: #001E60;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #00A3E0;
+      padding-bottom: 10px;
+    }
+
+    .integrante {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-left: 4px solid #00A3E0;
+      background-color: #f5f5f5;
+    }
+
+    .integrante-numero {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #001E60;
+      margin-right: 15px;
+      min-width: 30px;
+    }
+
+    .integrante-nombre {
+      flex: 1;
+      font-size: 1.2rem;
+      padding: 5px 0;
+      border-bottom: 2px dotted #ccc;
+    }
+
+    .tareas {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .tareas h3 {
+      color: #001E60;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #00A3E0;
+      padding-bottom: 10px;
+    }
+
+    .tarea {
+      display: flex;
+      align-items: flex-start;
+      padding: 12px;
+      margin-bottom: 10px;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+    }
+
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #001E60;
+      margin-right: 15px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .tarea-content {
+      flex: 1;
+    }
+
+    .tarea-titulo {
+      font-weight: bold;
+      color: #001E60;
+      margin-bottom: 5px;
+    }
+
+    .tarea-descripcion {
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .archivos {
+      background-color: #e3f2fd;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      border-left: 4px solid #0066CC;
+    }
+
+    .archivos h4 {
+      color: #001E60;
+      margin-bottom: 10px;
+    }
+
+    .archivos ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .archivos li {
+      padding: 5px 0;
+      color: #0066CC;
+      font-family: 'Courier New', monospace;
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 2px solid #ccc;
+      text-align: center;
+      color: #666;
+    }
+
+    @media print {
+      body {
+        padding: 20px;
+      }
+      
+      .grupo {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🤖 RoboHub - Proyecto Colaborativo</h1>
+    <p>Asignación de grupos y tareas</p>
+  </div>
+
+  <!-- GRUPO 1 -->
+  <div class="grupo">
+    <div class="grupo-header">
+      <h2>📱 GRUPO 1: Frontend/Presentación</h2>
+      <p>Responsabilidad: Crear la interfaz visual y de presentación</p>
+    </div>
+
+    <div class="integrantes">
+      <h3>👥 Integrantes</h3>
+      <div class="integrante">
+        <span class="integrante-numero">1.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+      <div class="integrante">
+        <span class="integrante-numero">2.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+      <div class="integrante">
+        <span class="integrante-numero">3.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+      <div class="integrante">
+        <span class="integrante-numero">4.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+      <div class="integrante">
+        <span class="integrante-numero">5.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+    </div>
+
+    <div class="tareas">
+      <h3>✅ Tareas Asignadas</h3>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">1. Header</div>
+          <div class="tarea-descripcion">Logo, navegación, menú responsive</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">2. Footer</div>
+          <div class="tarea-descripcion">Copyright, redes sociales, información de contacto</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">3. Hero Section</div>
+          <div class="tarea-descripcion">Banner principal con título y call-to-action</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">4. About Section</div>
+          <div class="tarea-descripcion">Descripción del proyecto y características principales</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">5. Featured Gallery</div>
+          <div class="tarea-descripcion">Galería de robots destacados (primeros 3)</div>
+        </div>
+      </div>
+
+      <div class="archivos">
+        <h4>📁 Archivos a trabajar:</h4>
+        <ul>
+          <li>📂 grupo1-frontend/header.js + header.css</li>
+          <li>📂 grupo1-frontend/footer.js + footer.css</li>
+          <li>📂 grupo1-frontend/hero.js + hero.css</li>
+          <li>📂 grupo1-frontend/about.js + about.css</li>
+          <li>📂 grupo1-frontend/gallery.js + gallery.css</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRUPO 2 -->
+  <div class="grupo">
+    <div class="grupo-header">
+      <h2>⚙️ GRUPO 2: Core Functionality</h2>
+      <p>Responsabilidad: Funcionalidad principal de la aplicación</p>
+    </div>
+
+    <div class="integrantes">
+      <h3>👥 Integrantes</h3>
+      <div class="integrante">
+        <span class="integrante-numero">1.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+      <div class="integrante">
+        <span class="integrante-numero">2.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+      <div class="integrante">
+        <span class="integrante-numero">3.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+      <div class="integrante">
+        <span class="integrante-numero">4.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+    </div>
+
+    <div class="tareas">
+      <h3>✅ Tareas Asignadas</h3>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">1. Formulario de Robots</div>
+          <div class="tarea-descripcion">Botón para abrir modal, manejar submit, validación, agregar/editar robots</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">2. Barra de Búsqueda</div>
+          <div class="tarea-descripcion">Input de búsqueda en tiempo real (por nombre y descripción)</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">3. Filtros por Tipo</div>
+          <div class="tarea-descripcion">Select dropdown para filtrar por tipo de robot</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">4. Integración con localStorage</div>
+          <div class="tarea-descripcion">Asegurar que los datos se persistan correctamente</div>
+        </div>
+      </div>
+
+      <div class="archivos">
+        <h4>📁 Archivos a trabajar:</h4>
+        <ul>
+          <li>📂 grupo2-core/form.js + form.css</li>
+          <li>📂 grupo2-core/search.js + search.css</li>
+          <li>📂 grupo2-core/filters.js + filters.css</li>
+          <li>📂 grupo2-core/crud.js + crud.css (opcional)</li>
+          <li>📂 grupo2-core/list.js + list.css (opcional)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRUPO 3 -->
+  <div class="grupo">
+    <div class="grupo-header">
+      <h2>🚀 GRUPO 3: Advanced Features</h2>
+      <p>Responsabilidad: Características avanzadas y extras</p>
+    </div>
+
+    <div class="integrantes">
+      <h3>👥 Integrantes</h3>
+      <div class="integrante">
+        <span class="integrante-numero">1.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+      <div class="integrante">
+        <span class="integrante-numero">2.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+      <div class="integrante">
+        <span class="integrante-numero">3.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+      <div class="integrante">
+        <span class="integrante-numero">4.</span>
+        <div class="integrante-nombre"></div>
+      </div>
+    </div>
+
+    <div class="tareas">
+      <h3>✅ Tareas Asignadas</h3>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">1. Panel de Estadísticas</div>
+          <div class="tarea-descripcion">Mostrar total de robots, cantidad por tipo, favoritos (actualizado en tiempo real)</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">2. Toggle de Favoritos</div>
+          <div class="tarea-descripcion">Botón para mostrar solo robots favoritos</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">3. Ordenamiento</div>
+          <div class="tarea-descripcion">Select para ordenar por nombre, año, tipo, más recientes</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">4. Modal de Detalles</div>
+          <div class="tarea-descripcion">Ver información completa del robot con diseño atractivo</div>
+        </div>
+      </div>
+
+      <div class="tarea">
+        <div class="checkbox"></div>
+        <div class="tarea-content">
+          <div class="tarea-titulo">5. Exportar a JSON</div>
+          <div class="tarea-descripcion">Botón para descargar todos los datos en formato JSON</div>
+        </div>
+      </div>
+
+      <div class="archivos">
+        <h4>📁 Archivos a trabajar:</h4>
+        <ul>
+          <li>📂 grupo3-advanced/stats.js + stats.css</li>
+          <li>📂 grupo3-advanced/favorites.js + favorites.css</li>
+          <li>📂 grupo3-advanced/sorting.js + sorting.css</li>
+          <li>📂 grupo3-advanced/detailsModal.js + modal.css</li>
+          <li>📂 grupo3-advanced/export.js + export.css</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

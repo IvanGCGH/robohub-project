@@ -1,0 +1,30 @@
+# ============================================
+# .gitignore - RoboHub Project
+# ============================================
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Node modules (si agregan npm después)
+node_modules/
+package-lock.json
+
+# Backup files
+*.bak
+*.backup
