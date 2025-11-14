@@ -74,7 +74,7 @@ function closeModal() {
 }
 
 
-//INICIALIZADOR FILTROS (setupRobotFilters();)
+//INICIALIZADOR FILTROS (robotFilter)
  
 document.addEventListener('DOMContentLoaded', () => {
     // cargar datos 
@@ -82,12 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
         AppState.robots = loadFromLocalStorage();
     }
     
-    // ejecutar la función para montar el filtro
-    robotFilters();
-    
-    // renderizar la vista inicial completa 
-    renderRobots(); 
+    robotFilters(); // ejecutar la función para montar el filtro
+    renderRobots();  // renderizar los robots
 
     console.log('🗃️ Funcion de filtro operativa');
-    
 });
