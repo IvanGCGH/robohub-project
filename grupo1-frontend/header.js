@@ -27,3 +27,29 @@
 // ============================================
 
 // Tu código acá...
+
+//Selección del header
+const header = document.getElementById('main-header')
+
+//Agregar el contenido HTML al header
+  header.innerHTML = `
+  <nav class="navbar">
+    <div class="logo">
+      <span class="logo-icon">🤖</span>
+      <span class="logo-text">RoboHub</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#hero-section" class="nav-link">Inicio</a></li>
+      <li><a href="#about-section" class="nav-link">Acerca de</a></li>
+      <li><a href="#robots-list" class="nav-link">Robots</a></li>
+      <li><a href="#featured-gallery" class="nav-link">Destacados</a></li>
+      <li><a href="#stats-panel" class="nav-link">Estadisticas</a></li>
+    </ul>
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+`;
