@@ -65,15 +65,15 @@ function renderAboutSection() {
 
   aboutSection.innerHTML = `
     <div class="about-container">
-      <div class="about-content">
-        <h2>Acerca de RoboHub</h2>
-        <p>
+      <div class="about-header">
+        <h2 class="about-title">Acerca de RoboHub</h2>
+        <p class="about-intro">
         RoboHub es tu plataforma integral para gestionar, organizar y explorar el fascinante mundo de la robótica.
         Diseñada pensando en eficiencia y simplicidad.
         </p>
       </div>
 
-      <div class="features">
+      <div class="features-grid">
         ${crearCards()}
       </div>
 
@@ -87,14 +87,14 @@ function renderAboutSection() {
 }
 
 // --------------------------------------------------------------------------------------
-// Esta funcion recorre la lista de robots y genera una card HTML por cada elemento.
+// La función recorre la lista de robots y genera una card HTML por cada elemento.
 // Por último, une todas las cards en un único bloque de texto para insertar en el DOM.
 // --------------------------------------------------------------------------------------
 
 function crearCards() {
   const cards = robots.map(r => {
-    return `<div class="feature">
-        <span>${r.icon}</span>
+    return `<div class="feature-card ">
+        <span class="feature-icon">${r.icon}</span>
         <h3>${r.nombre}</h3>
         <p>${r.descripcion}</p>
       </div>`
@@ -103,4 +103,22 @@ function crearCards() {
   return cards.join("");
 }
 
+// ----------------------------------------------------------------------
+// Función que agrega la clase "visible" a cada card con un pequeño retraso.
+// Esto crea un efecto visual de aparición escalonada.
+// ----------------------------------------------------------------------
+
+function activarAnimacionCards() {
+  const cards = document.querySelectorAll(".feature-card");
+
+  cards.forEach((card, index) => {
+    const delay = index * 150;
+
+    setTimeout(() => {
+      card.classList.add("visible");
+    }, delay);
+  });
+}
+
 renderAboutSection();
+activarAnimacionCards();
