@@ -22,3 +22,11 @@
 // </div>
 // ============================================
 
+document.addEventListener('DOMContentLoaded', function() {
+  
+  const footerContainer = document.getElementById('main-footer');
+  const currentYear = new Date().getFullYear();
+
+
+
+}
