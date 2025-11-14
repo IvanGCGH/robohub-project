@@ -72,3 +72,22 @@ function closeModal() {
   // Resetear título
   document.getElementById('modal-title').textContent = 'Agregar Robot';
 }
+
+
+//INICIALIZADOR FILTROS (setupRobotFilters();)
+ 
+document.addEventListener('DOMContentLoaded', () => {
+    // cargar datos 
+    if (AppState.robots.length === 0) {
+        AppState.robots = loadFromLocalStorage();
+    }
+    
+    // ejecutar la función para montar el filtro
+    robotFilters();
+    
+    // renderizar la vista inicial completa 
+    renderRobots(); 
+
+    console.log('🗃️ Funcion de filtro operativa');
+    
+});

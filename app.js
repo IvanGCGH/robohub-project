@@ -110,7 +110,7 @@ function getDefaultRobots() {
       description: 'Robot quirúrgico para cirugías mínimamente invasivas',
       favorite: false,
       created: new Date().toISOString()
-    }
+    },
   ];
 }
 
