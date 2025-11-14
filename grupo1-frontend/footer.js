@@ -26,8 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const footerContainer = document.getElementById('main-footer');
   const currentYear = new Date().getFullYear();
-
-if (footerContainer) {
     
     const footerHTML = `
       <div class="footer-content">
@@ -52,6 +50,34 @@ if (footerContainer) {
           </ul>
         </div>
 
+        <!-- Sección 3: Contacto -->
+        <div class="footer-section">
+          <h4>Contacto</h4>
+          <!-- Usamos la lista .footer-contact como en el CSS -->
+          <ul class="footer-contact">
+            <li>📧 <a href="mailto:info@robohub.com" style="color:white; text-decoration:none;">info@robohub.com</a></li>
+            <li>📱 <a href="tel:+541112345678" style="color:white; text-decoration:none;">+54 11 1234-5678</a></li>
+            <li>📍 Buenos Aires, Argentina</li>
+          </ul>
+        </div>
+
+        <!-- Sección 4: Redes Sociales -->
+        <div class="footer-section">
+          <h4>Síguenos</h4>
+          <!-- Usamos .social-links y .social-link como en el CSS -->
+          <div class="social-links">
+            <!-- 
+              Iconos actualizados según la imagen y URLs especificadas.
+              Usamos emojis que representan los íconos de la imagen.
+            -->
+            <a href="https://www.pescar.org.ar/" target="_blank" class="social-link" title="Pescar">📘</a>
+            <a href="https://www.twitter.com/" target="_blank" class="social-link" title="Twitter">🐦</a>
+            <a href="https://www.instagram.com/" target="_blank" class="social-link" title="Instagram">📸</a>
+            <a href="https://www.linkedin.com/" target="_blank" class="social-link" title="LinkedIn">💼</a>
+            <a href="https://www.artech-consulting.com.ar/" target="_blank" class="social-link" title="Artech Consulting">💻</a>
+          </div>
+        </div>
+
       </div>
       
       <!-- Footer Bottom -->
@@ -64,8 +90,4 @@ if (footerContainer) {
     
     footerContainer.innerHTML = footerHTML;
     
-  } else {
-    console.error('Error: No se encontró el elemento con ID "main-footer".');
-  }
-  
 });
