@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="footer-section">
           <h4>Síguenos</h4>
           <div class="social-links">
-            <a href="https://www.facebook.com/" target="_blank" class="social-link" title="Facebook">📘</a>
             <a href="https://www.twitter.com/" target="_blank" class="social-link" title="Twitter">🐦</a>
             <a href="https://www.instagram.com/" target="_blank" class="social-link" title="Instagram">📸</a>
             <a href="https://www.linkedin.com/" target="_blank" class="social-link" title="LinkedIn">💼</a>
