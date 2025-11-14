@@ -27,6 +27,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const footerContainer = document.getElementById('main-footer');
   const currentYear = new Date().getFullYear();
 
+if (footerContainer) {
 
-
-}
+    const footerHTML = 
+      
+    footerContainer.innerHTML = footerHTML;
+    
+  } else {
+    console.error('Error: No se encontró el elemento con ID "main-footer".');
+  }
+  
+});
