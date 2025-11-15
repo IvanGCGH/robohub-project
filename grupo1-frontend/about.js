@@ -120,5 +120,24 @@ function activarAnimacionCards() {
   });
 }
 
+// ----------------------------------------------------------------------
+// Esta función activa la redirección del botón "Ver Robots"
+// y la página realiza un scroll suave.
+// ----------------------------------------------------------------------
+
+function activarRedireccionBoton() {
+  const btn = document.querySelector(".btn-primary");
+
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    const section = document.getElementById("robots-list");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+}
+
 renderAboutSection();
 activarAnimacionCards();
+activarRedireccionBoton();
