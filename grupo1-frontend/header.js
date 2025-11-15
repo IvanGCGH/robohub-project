@@ -63,3 +63,6 @@ menuToggle.addEventListener('click', () => {
   navLinks.classList.toggle('active');
   menuToggle.classList.toggle('active');
 }); 
+
+//Agregar scroll suave al hacer click en los links del menú
+document.documentElement.style.scrollBehavior ="smooth";
