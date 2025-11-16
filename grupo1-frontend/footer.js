@@ -82,3 +82,5 @@ document.addEventListener('DOMContentLoaded', function() {
     footerContainer.innerHTML = footerHTML;
 
 });
+
+document.documentElement.style.scrollBehavior ="smooth";
