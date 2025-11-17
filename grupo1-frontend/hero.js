@@ -67,7 +67,7 @@ hero.innerHTML = `
 
         <div class="hero-image">
             <div class="robot-showcase">
-                <img scr="https://robohash.org/R2-D2?set=set1&size=200x200" alt="Robo Hub" class="showcase-robot"/>
+                <img class="showcase-robot" src="https://robohash.org/SVH.png?set=set1" alt="RoboHub" >
 
                 <div class="floating-icons">
                     <div class="float-icon" :nth-child(1)>🤖</div>
