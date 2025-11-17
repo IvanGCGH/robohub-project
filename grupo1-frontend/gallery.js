@@ -30,8 +30,6 @@ const featuredGallery = document.getElementById("featured-gallery");
 
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(() => {
-    console.log(AppState);
-
     renderFeaturedGallery();
   }, 100);
 });
@@ -46,16 +44,18 @@ function renderFeaturedGallery() {
 
   // Agrego la siguiente estructura HTMl al container de la galeria
   galleryContainer.innerHTML = `
-        <div class="gallery-header">
-          <h1 class="gallery-title">🌟Robots destacados</h1>
-          <h4 class="gallery-subtitle">Los primeros robots de nuestra colleción</h4>
-        </div>
-        <div class="gallery-grid">
-        </div>
-        <div class="gallery-footer">
-          <button class="btn-primary">Ver todos los robots -></button>
-        </div>
-     `;
+      <div class="gallery-header">
+        <h1 class="gallery-title">🌟Robots destacados</h1>
+        <h4 class="gallery-subtitle">Los primeros robots de nuestra colleción</h4>
+      </div>
+
+      <div class="gallery-grid">
+
+      </div>
+
+      <div class="gallery-footer">
+        <button class="btn-primary">Ver todos los robots -></button>
+      </div>`;
 
   // El div clase "gallery-grid" lo inicializo vacio ya que allí voy a
   // insertar las cards de robots
@@ -81,9 +81,7 @@ function renderFeaturedGallery() {
     // La genero dinamicamente con la informacion de cada robot
     robotGalleryCard.innerHTML = `
     <div class="gallery-card-image">
-      <img src="${getRobotImage(robot.name)}" alt="${
-      robot.name
-    }" class="gallery-card-image">
+      <img src="${getRobotImage(robot.name)}" alt="${robot.name}">
       <div class="gallery-overlay">
         <button class="gallery-btn">Ver más detalles</button>
       </div>
@@ -100,15 +98,89 @@ function renderFeaturedGallery() {
     // Los inserto al HTML, mas especificamente al gallery-grid
     galleryGrid.appendChild(robotGalleryCard);
 
+    let robotModal = renderGalleryModal(robot);
+
     // Ahora agrego los listeners al boton del overlay
-    const galleryOverlayBtn = robotGalleryCard
+    robotGalleryCard
       .querySelector(".gallery-btn")
       .addEventListener("click", () => {
-        // TODO -> Debería abrir un modal con toda la información del robot
+        robotModal.classList.add("active");
+      });
+
+    robotModal
+      .querySelector(".details-modal-close")
+      .addEventListener("click", () => {
+        robotModal.classList.remove("active");
       });
   });
+}
 
-  // 1. Traigo los primeros 3 robots guardados
-  // 2. Debería renderizar la galeria con esos robots
-  // 3. Para renderizarla tendría que inyectar el HTML que necesito para la estructura general
+function renderGalleryCard(robot) {}
+
+function renderGalleryModal(robot) {
+  let robotGalleryModal = document.createElement("div");
+  robotGalleryModal.classList.add("details-modal", "modal");
+
+  robotGalleryModal.innerHTML = `<div class="details-modal-content">
+
+          <button class="details-modal-close">X</button>
+
+          <div class="details-modal-body">
+            <div class="details-image-section">
+                <img src=${getRobotImage(robot.name)} alt="${
+    robot.name
+  }" class="details-image">
+              <button class="details-favorite-btn">${
+                robot.favorite === true ? "💓Favorito" : "🤍Marcar Favorito"
+              }</button>
+            </div>
+            <div class="details-info-section">
+
+              <h1 class="details-title">${robot.name}</h1>
+              <span class="details-type">${robot.type}</span>
+
+              <div class="details-info-grid">
+
+                <div class="details-info-item">
+                  <label for="info-value" class="info-label">📆AÑO DE CREACIÓN</label>
+                  <p class="info-value">${robot.year}</p>
+                </div>
+                <div class="details-info-item">
+                  <label for="info-value" class="info-label">🆔ID ÚNICO</label>
+                  <p class="info-value">${robot.id}</p>
+                </div>
+                <div class="details-info-item">
+                  <label for="info-value" class="info-label">⏰FECHA DE CREACIÓN</label>
+                  <p class="info-value">${robot.created
+                    .substring(0, 9)
+                    .split("-")
+                    .reverse()
+                    .join("/")}</p>
+                </div>
+                <div class="details-info-item">
+                  <label for="info-value" class="info-label">❤️ESTADO FAVORITO</label>
+                  <p class="info-value">${
+                    robot.favorite === true ? "Sí💓" : "No❌"
+                  }</p>
+                </div>
+              </div>
+
+              <div class="details-description">
+                <h3>📚Descripción</h3>
+                <p>${robot.description}</p>
+              </div>
+
+              <div class="details-actions">
+                <button class="btn-primary">✏️Editar</button>
+                <button class="btn-delete btn-danger">🗑️Eliminar</button>
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>`;
+
+  return featuredGallery.appendChild(robotGalleryModal);
 }
