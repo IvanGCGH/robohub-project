@@ -30,7 +30,7 @@ const hero = document.getElementById('hero-section')
 // creamos el contenido del hero
 hero.innerHTML = `
     <div class="hero-content">
-    
+        
         <div class="hero-text">
             <h1 class="hero-title">
                 Bienvenido a <span class="highlight">RoboHub</span>
