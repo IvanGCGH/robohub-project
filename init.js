@@ -82,8 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         AppState.robots = loadFromLocalStorage();
     }
     
-    robotFilters(); // ejecutar la función para montar el filtro
+    robotFilters(); // ejecuta funcio nde filtro
+    setupSearch(); // ejecuta funcion de busqueda
     renderRobots();  // renderizar los robots
-
-    console.log('🗃️ Funcion de filtro operativa');
 });
