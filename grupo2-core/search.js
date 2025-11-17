@@ -30,53 +30,70 @@
 
 // Tu código acá...
 
-const barraDeBusqueda = document.getElementById("search-container");
+function setupSearch() {
+    const searchContainer = document.getElementById("search-container");
 
-barraDeBusqueda.innerHTML = `<div id="search-container">
-  <div class="search-wrapper">
-    <!-- Ícono de lupa -->
-    <span class="search-icon">
-      🔍
-      <!-- O con un ícono de librería como Font Awesome:
-      <i class="fa fa-search"></i>
-      -->
-    </span>
+    if (!searchContainer) {
+        console.error('El contenedor de búsqueda no fue encontrado.');
+        return;
+    }
 
-    <!-- Campo de búsqueda -->
-    <input
-      type="text"
-      class="search-input"
-      placeholder="Buscar robot por nombre."
-      id="search-input"
-    />
+    // Usamos el contenedor existente, no duplicamos el ID
+    searchContainer.innerHTML = `
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input
+                type="text"
+                class="search-input"
+                placeholder="Nombre o descripción..."
+                id="search-input"
+            />
+            <button class="search-clear" id="search-clear" title="Limpiar">✖</button>
+        </div>
+    `;
 
-    <!-- Botón para limpiar el campo -->
-    <button class="search-clear" id="search-clear" title="Limpiar">
-      ✖
-      <!-- o <i class="fa fa-times"></i> si usas íconos -->
-    </button>
-  </div>
-</div>
-`; 
+    // 2. Obtener los elementos después de la inyección
+    const searchInput = document.getElementById("search-input");
+    const searchClearButton = document.getElementById("search-clear");
+    
+    // Si no existen (algo salió mal en la inyección), salimos
+    if (!searchInput) return;
 
 
-function buscarRobots(criterioBusqueda){
-    AppState.filteredRobots = AppState.robots.filter(
-      (r) => r.name.includes(criterioBusqueda) || r.description.includes(criterioBusqueda));
+    // Usamos 'input' para que filtre mientras el usuario escribe.
+    searchInput.addEventListener('input', (e) => {
+        // Modificar AppState.searchTerm con el valor del input
+        AppState.searchTerm = e.target.value.trim();
+        
+        // Llamar a renderRobots() para que aplique el filtro
+        renderRobots(); 
+        
+        // Mostrar/Ocultar el botón de limpiar
+        searchClearButton.style.display = AppState.searchTerm ? 'flex' : 'none';
+        
+        console.log('Búsqueda actualizada:', AppState.searchTerm);
+    });
 
-      AppState.searchTerm = criterioBusqueda;
-      
-      console.log(AppState.filteredRobots);
+
+    // 4. Event Listener para limpiar la búsqueda
+    searchClearButton.addEventListener('click', () => {
+        // Resetear el valor del input y el estado global
+        searchInput.value = '';
+        AppState.searchTerm = '';
+        
+        // Ocultar el botón de limpiar
+        searchClearButton.style.display = 'none';
+
+        // Volver a renderizar para mostrar todos los robots
+        renderRobots(); 
+        console.log('Búsqueda limpiada.');
+    });
+    
+    // Inicializar el botón de limpiar como oculto
+    searchClearButton.style.display = 'none';
+    
+    // Asegurar que el input refleje el estado inicial
+    searchInput.value = AppState.searchTerm;
+
+    console.log("✅ Componente de búsqueda configurado y activo.");
 }
-
-
-const input = document.getElementById("search-input");
-
-input.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    const textoIngresado = input.value.trim();
-    buscarRobots(textoIngresado);
-  }
-});
-
-console.log("Agrego barra de busqueda")
