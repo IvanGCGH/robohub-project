@@ -270,3 +270,7 @@ AppState.showOnlyFavorites // Boolean para filtro de favoritos
 - ✅ Integración exitosa con otros grupos
 
 ---
+
+
+
+https://github.com/user-attachments/assets/470ed159-7cc7-4810-a3f7-367182b00892

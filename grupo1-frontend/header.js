@@ -53,3 +53,16 @@ const header = document.getElementById('main-header')
     </div>
   </nav>
 `;
+
+//Agregar funcionalidad al menú responsive
+const menuToggle = document.getElementById('menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+//Evento click para mostrar/ocultar el menú
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+  menuToggle.classList.toggle('active');
+}); 
+
+//Agregar scroll suave al hacer click en los links del menú
+document.documentElement.style.scrollBehavior ="smooth";
