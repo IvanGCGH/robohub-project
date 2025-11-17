@@ -49,8 +49,7 @@ function robotFilters() {
         'Doméstico',
         'Militar',
         'Industrial',
-        'Médico',
-        'Exploración' 
+        'Médico'
     ];
     
     // Generar las <option> dinámicamente a partir de la lista estática
