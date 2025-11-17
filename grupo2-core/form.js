@@ -99,5 +99,6 @@ form.addEventListener("submit", (e) => {
   }
 
   addRobot(data);
+  alert("Robot creado con éxito.");
   closeModal();
 });
