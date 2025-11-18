@@ -25,16 +25,124 @@
 //   </div>
 // `).join('');
 // ============================================
-
 const featuredGallery = document.getElementById("featured-gallery");
+let currentIndex = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(() => {
-    renderFeaturedGallery();
+    renderFeaturedGalleryCarousel();
   }, 100);
 });
 
-function renderFeaturedGallery() {
+function renderFeaturedGalleryCarousel() {
+  // Primero renderizo el carousel para acceder a los elementos
+  renderCarousel();
+
+  // Traigo el riel, el array de items y los botones
+  const carouselTrack = document.querySelector(".carousel-track");
+  const items = document.querySelectorAll(".carousel-item");
+  const prevBtn = document.querySelector(".prev-btn");
+  const nextBtn = document.querySelector(".next-btn");
+
+  const totalItems = items.length;
+
+  // Esta función permite mover el riel de item a item
+  const updateCarousel = () => {
+    // Hago un translateX para mover el track al siguiente item en el carousel, en este caso multiplico el indice por 100 para moverlo, -200% y -300% en el eje X y mostrar los items "ocultos"
+    carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Esto permite deshabilitar el boton si se llegó al extremo
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === totalItems - 1;
+  };
+
+  // Agrego los listeners a los botones
+  prevBtn.addEventListener("click", () => {
+    // Si el indice es mayor a 0, entonces significa que todavía hay ítems a la izquierda
+    if (currentIndex > 0) {
+      // Resto el indice y llamo a "updateCarousel" que utilizará el indice actual para calcular el translateX
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    // Si el indice es menor a la cantidad de items, entonces...
+    if (currentIndex < totalItems - 1) {
+      // Aumento el indice y llamo a "updateCarousel" para que utilice el indice actual para calcular el translateX
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+}
+
+// Cree esta función para para modularizar un poco el trabajo, además, me permite cambiar de una forma de renderizado a otra rápidamente.
+function renderCarousel() {
+  // Obtengo los 3 primeros robots
+  const featuredRobots = AppState.robots.slice(0, 3);
+
+  const galleryContainer = document.createElement("div");
+  galleryContainer.classList.add("carousel-wrapper");
+
+  // Estructura base para generar el carousel
+  galleryContainer.innerHTML = `
+    <div class="gallery-header">
+      <h1 class="gallery-title">🌟Robots destacados</h1>
+      <h4 class="gallery-subtitle">Los primeros robots de nuestra colleción</h4>
+    </div>
+    <button class="carousel-arrow prev-btn">❮</button>
+    <div class="carousel-window">
+        <div class="carousel-track">
+            </div>
+    </div>
+    <button class="carousel-arrow next-btn">❯</button>
+  `;
+
+  featuredGallery.appendChild(galleryContainer);
+
+  // Seleccionamos el track RECIÉN creado para inyectarle las cards
+  const carouselTrack = galleryContainer.querySelector(".carousel-track");
+
+  featuredRobots.forEach((robot) => {
+    // Renderizo cada card y la guardo en una variable
+    let robotGalleryCardItem = renderGalleryCard(robot);
+
+    // Le agregamos la clase carousel-item
+    robotGalleryCardItem.classList.add("carousel-item");
+
+    carouselTrack.appendChild(robotGalleryCardItem);
+
+    // Genero el modal para cada card
+    let robotGalleryModal = renderGalleryModal(robot);
+
+    featuredGallery.appendChild(robotGalleryModal);
+
+    // Añado el click event a cada boton del overlay de las cartas
+    robotGalleryCardItem
+      .querySelector(".gallery-btn")
+      .addEventListener("click", () => {
+        robotGalleryModal.classList.add("active"); // O la clase que uses para mostrar
+        robotGalleryModal.style.opacity = "1"; // Asegurando visibilidad si usas CSS puro
+        robotGalleryModal.style.pointerEvents = "all";
+      });
+
+    // Ahora agrego los listeners al boton del overlay
+    robotGalleryCardItem
+      .querySelector(".gallery-btn")
+      .addEventListener("click", () => {
+        robotGalleryModal.classList.add("active");
+      });
+
+    // Agrego el listener al boton "close" del modal
+    robotGalleryModal
+      .querySelector(".details-modal-close")
+      .addEventListener("click", () => {
+        robotGalleryModal.classList.remove("active");
+      });
+  });
+}
+
+function renderFeaturedGalleryGrid() {
   // Obtengo los 3 primeros robots del array de robots
   const featuredRobots = AppState.robots.slice(0, 3);
 
@@ -74,12 +182,39 @@ function renderFeaturedGallery() {
   // Traigo el "ancla" del HTML, o sea "gallery-grid"
   const galleryGrid = featuredGallery.querySelector(".gallery-grid");
   featuredRobots.forEach((robot) => {
-    // Creo el div de la card del robot
-    let robotGalleryCard = document.createElement("div");
-    robotGalleryCard.classList.add("gallery-card");
+    // Renderizo cada card
+    let robotGalleryCard = renderGalleryCard(robot);
 
-    // La genero dinamicamente con la informacion de cada robot
-    robotGalleryCard.innerHTML = `
+    // Las inserto al HTML, mas especificamente al gallery-grid
+    galleryGrid.appendChild(robotGalleryCard);
+
+    // Creo que en lugar de renderizar 3 modales, se podría renderizar uno
+    // y cambiar los valores de forma dinámica según el botón que se clickee
+    let robotGalleryModal = renderGalleryModal(robot);
+
+    // Ahora agrego los listeners al boton del overlay
+    robotGalleryCard
+      .querySelector(".gallery-btn")
+      .addEventListener("click", () => {
+        robotGalleryModal.classList.add("active");
+      });
+
+    // Agrego el listener al boton "close" del modal
+    robotGalleryModal
+      .querySelector(".details-modal-close")
+      .addEventListener("click", () => {
+        robotGalleryModal.classList.remove("active");
+      });
+  });
+}
+
+function renderGalleryCard(robot) {
+  // Creo el div de la card del robot
+  let card = document.createElement("div");
+  card.classList.add("gallery-card");
+
+  // La genero dinamicamente con la informacion de cada robot
+  card.innerHTML = `
     <div class="gallery-card-image">
       <img src="${getRobotImage(robot.name)}" alt="${robot.name}">
       <div class="gallery-overlay">
@@ -95,33 +230,14 @@ function renderFeaturedGallery() {
       }</p>
     </div>`;
 
-    // Los inserto al HTML, mas especificamente al gallery-grid
-    galleryGrid.appendChild(robotGalleryCard);
-
-    let robotModal = renderGalleryModal(robot);
-
-    // Ahora agrego los listeners al boton del overlay
-    robotGalleryCard
-      .querySelector(".gallery-btn")
-      .addEventListener("click", () => {
-        robotModal.classList.add("active");
-      });
-
-    robotModal
-      .querySelector(".details-modal-close")
-      .addEventListener("click", () => {
-        robotModal.classList.remove("active");
-      });
-  });
+  return card;
 }
 
-function renderGalleryCard(robot) {}
-
 function renderGalleryModal(robot) {
-  let robotGalleryModal = document.createElement("div");
-  robotGalleryModal.classList.add("details-modal", "modal");
+  let modal = document.createElement("div");
+  modal.classList.add("details-modal", "modal");
 
-  robotGalleryModal.innerHTML = `<div class="details-modal-content">
+  modal.innerHTML = `<div class="details-modal-content">
 
           <button class="details-modal-close">X</button>
 
@@ -182,5 +298,5 @@ function renderGalleryModal(robot) {
 
         </div>`;
 
-  return featuredGallery.appendChild(robotGalleryModal);
+  return featuredGallery.appendChild(modal);
 }
