@@ -38,6 +38,9 @@
 // CREAR Y MOSTRAR EL BOTÓN "AGREGAR ROBOT"
 // ===============================
 
+// variable para editar robot
+let robotAEditar = null;
+
 // Buscar el contenedor donde debe ir el botón
 const addRobotContainer = document.getElementById("add-robot-container");
 
@@ -59,29 +62,9 @@ const form = document.getElementById("robot-form");
 // Abrir modal
 addButton.addEventListener("click", () => {
   form.reset(); // limpia el formulario al abrir
+  document.getElementById("modal-title").textContent = "Agregar Robot";
   modal.classList.add("active"); // muestra modal centrado
 });
-
-// Cerrar con la X
-cerrarBtn.addEventListener("click", () => {
-  modal.classList.remove("active");
-});
-
-// Cerrar con Cancelar
-cancelarBtn.addEventListener("click", () => {
-  modal.classList.remove("active");
-});
-
-// Cerrar al hacer clic fuera del modal
-window.addEventListener("click", (event) => {
-  if (event.target === modal) {
-    modal.classList.remove("active");
-  }
-});
-
-// ===============================
-// MANEJO DEL SUBMIT DEL FORMULARIO
-// ===============================
 
 // Deshabilitar la validación nativa
 form.setAttribute("novalidate", true);
@@ -98,7 +81,32 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  addRobot(data);
-  alert("Robot creado con éxito.");
+  const tipoModal = document.getElementById("modal-title").textContent;
+
+  if (tipoModal === "Agregar Robot") {
+    addRobot(data);
+    alert("Robot creado con éxito.");
+  }
+  else if(tipoModal === "Editar Robot") {
+    updateRobot(robotAEditar.id, data);
+    robotAEditar = null;
+    alert("Robot actualizado con éxito.");
+
+  }
   closeModal();
 });
+
+
+function openEditModal(robot) {
+  document.getElementById('modal-title').textContent = 'Editar Robot';
+  modal.classList.add('active');
+
+  // Rellenar el formulario con los datos del robot
+  form.elements['name'].value = robot.name;
+  form.elements['type'].value = robot.type;
+  form.elements['year'].value = robot.year;
+  form.elements['description'].value = robot.description;
+
+  robotAEditar = robot;
+};
+
