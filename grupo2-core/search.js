@@ -62,9 +62,7 @@ function setupSearch() {
     searchClear.id = "search-clear";
     searchClear.textContent = "✖";
     searchClear.addEventListener("click", () => {
-        searchInput.value = "";
-        AppState.searchTerm = "";
-        renderRobots();
+        resetFilters()
         searchClear.style.display = "none";
     });
 
