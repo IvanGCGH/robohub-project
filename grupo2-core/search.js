@@ -16,9 +16,9 @@
 // - Los estilos van en search.css
 //
 // EJEMPLO:
-// <input 
-//   type="text" 
-//   id="search-input" 
+// <input
+//   type="text"
+//   id="search-input"
 //   placeholder="🔍 Buscar robots..."
 // >
 //
@@ -30,70 +30,50 @@
 
 // Tu código acá...
 
+// funcion invocada en init.js
 function setupSearch() {
+    // Obtener el contenedor de búsqueda de index.html
     const searchContainer = document.getElementById("search-container");
 
-    if (!searchContainer) {
-        console.error('El contenedor de búsqueda no fue encontrado.');
-        return;
-    }
+    // Crear el wrapper del input de búsqueda
+    const searchWrapper = document.createElement("div");
+    searchWrapper.className = "search-wrapper";
 
-    // Usamos el contenedor existente, no duplicamos el ID
-    searchContainer.innerHTML = `
-        <div class="search-wrapper">
-            <span class="search-icon">🔍</span>
-            <input
-                type="text"
-                class="search-input"
-                placeholder="Nombre o descripción..."
-                id="search-input"
-            />
-            <button class="search-clear" id="search-clear" title="Limpiar">✖</button>
-        </div>
-    `;
+    // Crear el ícono de búsqueda
+    const searchIcon = document.createElement("span");
+    searchIcon.className = "search-icon";
+    searchIcon.textContent = "🔍";
 
-    // 2. Obtener los elementos después de la inyección
-    const searchInput = document.getElementById("search-input");
-    const searchClearButton = document.getElementById("search-clear");
-    
-    // Si no existen (algo salió mal en la inyección), salimos
-    if (!searchInput) return;
-
-
-    // Usamos 'input' para que filtre mientras el usuario escribe.
-    searchInput.addEventListener('input', (e) => {
-        // Modificar AppState.searchTerm con el valor del input
+    // Crear el input de búsqueda con atributos y eventos
+    const searchInput = document.createElement("input");
+    searchInput.type = "text";
+    searchInput.className = "search-input";
+    searchInput.id = "search-input";
+    searchInput.placeholder = "Nombre o descripción...";
+    searchInput.addEventListener("input", (e) => {
         AppState.searchTerm = e.target.value.trim();
-        
-        // Llamar a renderRobots() para que aplique el filtro
-        renderRobots(); 
-        
-        // Mostrar/Ocultar el botón de limpiar
-        searchClearButton.style.display = AppState.searchTerm ? 'flex' : 'none';
-        
-        console.log('Búsqueda actualizada:', AppState.searchTerm);
+        renderRobots();
+        searchClear.style.display = AppState.searchTerm ? "flex" : "none";
     });
 
-
-    // 4. Event Listener para limpiar la búsqueda
-    searchClearButton.addEventListener('click', () => {
-        // Resetear el valor del input y el estado global
-        searchInput.value = '';
-        AppState.searchTerm = '';
-        
-        // Ocultar el botón de limpiar
-        searchClearButton.style.display = 'none';
-
-        // Volver a renderizar para mostrar todos los robots
-        renderRobots(); 
-        console.log('Búsqueda limpiada.');
+    // Crear el botón para limpiar la búsqueda
+    const searchClear = document.createElement("button");
+    searchClear.className = "search-clear";
+    searchClear.id = "search-clear";
+    searchClear.textContent = "✖";
+    searchClear.addEventListener("click", () => {
+        searchInput.value = "";
+        AppState.searchTerm = "";
+        renderRobots();
+        searchClear.style.display = "none";
     });
-    
-    // Inicializar el botón de limpiar como oculto
-    searchClearButton.style.display = 'none';
-    
-    // Asegurar que el input refleje el estado inicial
-    searchInput.value = AppState.searchTerm;
+
+    // Agregar los elementos al wrapper y luego al contenedor principal
+    searchWrapper.appendChild(searchIcon);
+    searchWrapper.appendChild(searchInput);
+    searchWrapper.appendChild(searchClear);
+
+    searchContainer.appendChild(searchWrapper);
 
     console.log("✅ Componente de búsqueda configurado y activo.");
 }
