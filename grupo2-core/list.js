@@ -62,7 +62,7 @@ function createPaginationButton(text, isEnabled, onClick) {
 function renderPaginationControls(totalRobots) {
     if (!paginationContainer) return;
     paginationContainer.innerHTML = '';
-    
+
     const totalPages = Math.ceil(totalRobots / ROBOTS_PER_PAGE);
 
     // Oculta los controles si solo hay una página o menos.
@@ -76,11 +76,11 @@ function renderPaginationControls(totalRobots) {
     // 1. Botón "Anterior"
     paginationContainer.appendChild(createPaginationButton('← Anterior', currentPage > 1, () => {
         currentPage--;
-        window.renderRobots(); 
+        window.renderRobots();
     }));
 
     // 2. Botones Numéricos (Muestra hasta 7 botones para no saturar)
-    const maxButtons = 7; 
+    const maxButtons = 7;
     let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
     let endPage = Math.min(totalPages, startPage + maxButtons - 1);
 
@@ -91,18 +91,18 @@ function renderPaginationControls(totalRobots) {
     for (let i = startPage; i <= endPage; i++) {
         const pageButton = createPaginationButton(i, i !== currentPage, () => {
             currentPage = i;
-            window.renderRobots(); 
+            window.renderRobots();
         });
         if (i === currentPage) {
             pageButton.classList.add('active-page'); // Estilo para resaltar la página actual
         }
         paginationContainer.appendChild(pageButton);
     }
-    
+
     // 3. Botón "Siguiente"
     paginationContainer.appendChild(createPaginationButton('Siguiente →', currentPage < totalPages, () => {
         currentPage++;
-        window.renderRobots(); 
+        window.renderRobots();
     }));
 }
 
@@ -116,23 +116,56 @@ function renderPaginationControls(totalRobots) {
  * @description Sobrescribe la función global renderRobots para aplicar paginación y renderizar
  * solo el subconjunto de robots de la página actual.
  */
-window.renderRobots = function() {
-    
-    if (typeof AppState === 'undefined' || !document.getElementById('robots-list')) {
-        return; 
+window.renderRobots = function () {
+    if (
+        typeof AppState === "undefined" ||
+        !document.getElementById("robots-list")
+    ) {
+        return;
     }
-    
-    const currentContainer = document.getElementById('robots-list');
-    let robotsToRender = AppState.filteredRobots;
+
+    const currentContainer = document.getElementById("robots-list");
+
+    // Aplicar filtros y búsqueda
+    let robotsToRender = AppState.robots;
+
+    // Filtro por favoritos (GRUPO 3)
+    if (AppState.showOnlyFavorites) {
+        robotsToRender = robotsToRender.filter((robot) => robot.favorite);
+    }
+
+    // Filtro por tipo (GRUPO 2)
+    if (AppState.currentFilter !== "all") {
+        robotsToRender = robotsToRender.filter(
+            (robot) => robot.type === AppState.currentFilter
+        );
+    }
+
+    // Búsqueda (GRUPO 2)
+    if (AppState.searchTerm) {
+        robotsToRender = robotsToRender.filter(
+            (robot) =>
+                robot.name.toLowerCase().includes(AppState.searchTerm.toLowerCase()) ||
+                robot.description
+                    .toLowerCase()
+                    .includes(AppState.searchTerm.toLowerCase())
+        );
+    }
+
+    // Ordenamiento (GRUPO 3)
+    robotsToRender = sortRobots(robotsToRender, AppState.sortBy);
+
+    // Guardar robots filtrados para que otros grupos los usen
+    AppState.filteredRobots = robotsToRender;
 
     // Si la lista filtrada está vacía pero el estado principal no lo está (error de timing),
     // usamos la lista principal para forzar el primer renderizado de datos.
     if (robotsToRender.length === 0 && AppState.robots.length > 0) {
         robotsToRender = AppState.robots;
     }
-    
+
     const totalPages = Math.ceil(robotsToRender.length / ROBOTS_PER_PAGE);
-    
+
     // Ajuste de la página actual
     if (currentPage > totalPages && totalPages > 0) {
         currentPage = totalPages;
@@ -145,8 +178,8 @@ window.renderRobots = function() {
     const endIndex = startIndex + ROBOTS_PER_PAGE;
     const robotsToShow = robotsToRender.slice(startIndex, endIndex); // Array de robots a mostrar.
 
-    currentContainer.innerHTML = '';
-    
+    currentContainer.innerHTML = "";
+
     // Manejo de estado vacío
     if (robotsToRender.length === 0) {
         currentContainer.innerHTML = `
@@ -156,14 +189,14 @@ window.renderRobots = function() {
           </div>
         `;
         renderPaginationControls(0);
-        if (typeof updateStats === 'function') updateStats();
+        if (typeof updateStats === "function") updateStats();
         return;
     }
 
     // Renderizar las cards de la página actual
-    robotsToShow.forEach(robot => {
+    robotsToShow.forEach((robot) => {
         // createRobotCard es una función global de app.js, usamos su salida.
-        const cardElement = createRobotCard(robot); 
+        const cardElement = createRobotCard(robot);
         currentContainer.appendChild(cardElement);
     });
 
@@ -171,7 +204,7 @@ window.renderRobots = function() {
     renderPaginationControls(robotsToRender.length);
 
     // Llamar a updateStats si el Grupo 3 lo ha implementado.
-    if (typeof updateStats === 'function') {
+    if (typeof updateStats === "function") {
         updateStats();
     }
 };
@@ -186,7 +219,7 @@ window.renderRobots = function() {
 function setupControls() {
     const controlsSection = document.querySelector('.controls-section');
     container = document.getElementById('robots-list');
-    
+
     if (!controlsSection || !container) {
         return;
     }
@@ -195,7 +228,7 @@ function setupControls() {
     const viewControlsDiv = document.createElement('div');
     viewControlsDiv.id = 'view-controls';
     viewControlsDiv.innerHTML = `<button id="toggle-view-btn">Vista Lista</button>`;
-    controlsSection.appendChild(viewControlsDiv); 
+    controlsSection.appendChild(viewControlsDiv);
 
     viewToggleButton = document.getElementById('toggle-view-btn');
     if (viewToggleButton) {
@@ -219,5 +252,5 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         setupControls();
         // app.js o init.js llamará a window.renderRobots() cuando los datos estén listos.
-    }, 50); 
+    }, 50);
 });
