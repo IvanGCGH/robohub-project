@@ -30,7 +30,7 @@ let currentIndex = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(() => {
-    renderFeaturedGalleryCarousel();
+    renderFeaturedGalleryGrid();
   }, 100);
 });
 
