@@ -1,0 +1,95 @@
+/* ===================================== */
+/* 1. Controles de Vista y Paginación */
+/* ===================================== */
+
+/* Asegura que todos los controles superiores se alineen en fila */
+.controls-section {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    align-items: center; 
+}
+
+/* Contenedor del botón de vista (inyectado) */
+#view-controls {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos base de los botones de control */
+#view-controls button,
+#pagination-controls button {
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#view-controls button:hover,
+#pagination-controls button:hover:not(:disabled) {
+    background-color: #303f9f;
+}
+
+/* Estilo para el botón de página activa/actual */
+#pagination-controls button.active-page {
+    background-color: #ff9800;
+    font-weight: bold;
+}
+
+/* Contenedor de paginación (botones inferiores) */
+#pagination-controls {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    padding: 30px 0;
+    gap: 8px;
+    clear: both; 
+}
+
+
+/* ===================================== */
+/* 2. ESTILOS BASE Y GRID */
+/* ===================================== */
+
+/* Estilo por defecto: Vista Grid */
+#robots-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+
+/* ===================================== */
+/* 3. CAMBIO DE VISTA: LISTA */
+/* ===================================== */
+
+/* Clase Modificadora: Activa la vista de lista */
+#robots-list.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+#robots-list.list-view .robot-card {
+    display: flex;
+    flex-direction: row; /* Coloca imagen e info en fila */
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-radius: 0;
+    border-bottom: 1px solid #eee;
+    box-shadow: none;
+    text-align: left;
+    width: 100%;
+}
+
+#robots-list.list-view .robot-info {
+    flex-grow: 1; 
+    padding: 0 20px;
+}
+
+#robots-list.list-view .robot-description {
+    display: none; /* Oculta descripciones largas en vista de lista */
+}
